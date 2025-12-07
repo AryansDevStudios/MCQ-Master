@@ -356,7 +356,7 @@ export function HomeView() {
       </div>
 
       <div className="flex justify-center mb-8">
-        <div className="bg-slate-800/50 p-1.5 rounded-full border border-white/10 flex relative">
+        <div className="bg-slate-800/50 p-1.5 rounded-full border border-white/10 flex relative gap-2.5">
           <Button
             onClick={() => setHomeTab('ai')}
             variant="ghost"
