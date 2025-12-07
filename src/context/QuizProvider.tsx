@@ -121,7 +121,7 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const addToast = useCallback((message: string, type: Toast['type'] = 'info') => {
-    const id = Date.now().toString();
+    const id = `${Date.now()}-${Math.random()}`;
     setToasts(prev => [...prev, { id, message, type }]);
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id));
