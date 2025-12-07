@@ -72,7 +72,7 @@ const SelectableCard = ({
 
 // --- Main Components ---
 
-function AiGenerator() {
+function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 'ai' | 'json') => void, setJsonInputForEditor: (json: string) => void }) {
   const { startQuiz, saveQuizToStorage, addToast, isInstantMode, setIsInstantMode } = useQuiz();
   const [isGenerating, setIsGenerating] = useState(false);
   const [isContextOpen, setIsContextOpen] = useState(false);
@@ -107,6 +107,13 @@ function AiGenerator() {
       addToast(result.error || 'Generation failed', 'error');
     }
     setIsGenerating(false);
+  };
+  
+  const handleViewJson = () => {
+    if (generatedQuizSummary) {
+      setJsonInputForEditor(JSON.stringify(generatedQuizSummary, null, 2));
+      setHomeTab('json');
+    }
   };
   
   return (
@@ -321,6 +328,14 @@ function AiGenerator() {
               
               <div className="flex w-full sm:w-auto gap-3">
                 <Button 
+                  onClick={handleViewJson}
+                  variant="outline"
+                  className="flex-1 sm:flex-none bg-transparent border-emerald-500/30 hover:bg-emerald-500/10 text-emerald-400 font-bold h-11 px-6 rounded-xl"
+                >
+                  <Code2 />
+                  View JSON
+                </Button>
+                <Button 
                   onClick={() => startQuiz(generatedQuizSummary, isInstantMode)} 
                   className="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold h-11 px-6 rounded-xl"
                 >
@@ -335,9 +350,8 @@ function AiGenerator() {
   );
 }
 
-function JsonEditor({ setHomeTab }: { setHomeTab: (tab: 'ai' | 'json') => void }) {
+function JsonEditor({ setHomeTab, jsonInput, setJsonInput }: { setHomeTab: (tab: 'ai' | 'json') => void; jsonInput: string; setJsonInput: (json: string) => void; }) {
     const { startQuiz, saveQuizToStorage, addToast, isInstantMode, setIsInstantMode } = useQuiz();
-    const [jsonInput, setJsonInput] = useState('');
     const [quizName, setQuizName] = useState('');
 
     const handleParseAndStart = () => {
@@ -458,6 +472,7 @@ function JsonEditor({ setHomeTab }: { setHomeTab: (tab: 'ai' | 'json') => void }
 
 export function HomeView() {
   const [homeTab, setHomeTab] = useState<'ai' | 'json'>('ai');
+  const [jsonInputForEditor, setJsonInputForEditor] = useState('');
 
   return (
     <div className="min-h-screen w-full text-zinc-100 flex flex-col items-center pt-8 pb-20 px-4 relative overflow-hidden">
@@ -516,8 +531,8 @@ export function HomeView() {
         
         {/* Content Area */}
         <div className="min-h-[400px]">
-          {homeTab === 'ai' && <AiGenerator />}
-          {homeTab === 'json' && <JsonEditor setHomeTab={setHomeTab} />}
+          {homeTab === 'ai' && <AiGenerator setHomeTab={setHomeTab} setJsonInputForEditor={setJsonInputForEditor} />}
+          {homeTab === 'json' && <JsonEditor setHomeTab={setHomeTab} jsonInput={jsonInputForEditor} setJsonInput={setJsonInputForEditor} />}
         </div>
 
       </div>
