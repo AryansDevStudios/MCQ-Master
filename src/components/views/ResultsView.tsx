@@ -42,6 +42,16 @@ export function ResultsView() {
 
   const feedback = getFeedbackMessage();
   const FeedbackIcon = feedback.icon;
+  
+  const questionsWithStatus = attempt.quizData.questions.map((q, idx) => ({
+    question: q,
+    originalIndex: idx,
+    isCorrect: attempt.userAnswers[idx] === q.correctAnswer,
+  })).sort((a, b) => {
+    if (a.isCorrect === b.isCorrect) return 0;
+    return a.isCorrect ? 1 : -1;
+  });
+
 
   return (
     <div className="max-w-4xl mx-auto w-full pb-20 animate-in slide-in-from-bottom-8 duration-700 fade-in">
@@ -162,9 +172,8 @@ export function ResultsView() {
         </h3>
 
         <div className="grid gap-6">
-          {attempt.quizData.questions.map((q, idx) => {
+          {questionsWithStatus.map(({ question: q, originalIndex: idx, isCorrect }) => {
             const userAns = attempt.userAnswers[idx];
-            const isCorrect = userAns === q.correctAnswer;
             const note = attempt.questionNotes[idx];
 
             return (
