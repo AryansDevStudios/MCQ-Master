@@ -52,8 +52,8 @@ export function QuizView() {
 
   if (!activeQuiz) return (
     <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4 animate-pulse">
-        <div className="w-12 h-12 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-zinc-500 font-medium">Loading your challenge...</p>
+        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        <p className="text-muted-foreground font-medium">Loading your challenge...</p>
     </div>
   );
 
@@ -68,20 +68,20 @@ export function QuizView() {
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-white tracking-tight">{activeQuiz.title}</h2>
+          <h2 className="text-2xl font-bold text-foreground tracking-tight">{activeQuiz.title}</h2>
           <div className="flex items-center gap-2 mt-1">
-             <span className="px-2 py-0.5 rounded bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium">
+             <span className="px-2 py-0.5 rounded bg-primary/10 border border-primary/20 text-primary text-xs font-medium">
                Question {currentQuestionIndex + 1} of {activeQuiz.questions.length}
              </span>
-             <span className="text-zinc-600 text-xs">•</span>
-             <span className="text-zinc-500 text-xs font-medium">Keep going!</span>
+             <span className="text-muted-foreground/50 text-xs">•</span>
+             <span className="text-muted-foreground text-xs font-medium">Keep going!</span>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           {/* Instant Mode Toggle */}
-          <div className="flex items-center gap-2 bg-zinc-900/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/5">
-            <Label htmlFor="instant-mode" className="text-xs font-medium text-zinc-400 cursor-pointer">Instant Check</Label>
+          <div className="flex items-center gap-2 bg-card px-3 py-1.5 rounded-full border">
+            <Label htmlFor="instant-mode" className="text-xs font-medium text-muted-foreground cursor-pointer">Instant Check</Label>
             <Switch 
               id="instant-mode" 
               checked={isInstantMode} 
@@ -91,7 +91,7 @@ export function QuizView() {
           </div>
 
           {/* Timer */}
-          <div className="flex items-center gap-2 font-mono text-sm font-bold text-amber-400 bg-amber-400/10 px-4 py-1.5 rounded-full border border-amber-400/20 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
+          <div className="flex items-center gap-2 font-mono text-sm font-bold text-amber-500 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-500/20 shadow-[0_0_10px_rgba(251,191,36,0.1)]">
             <Clock className="w-4 h-4" />
             <span className="tabular-nums tracking-wider">{formatTime(elapsedSeconds)}</span>
           </div>
@@ -101,12 +101,12 @@ export function QuizView() {
       {/* --- MAIN CARD --- */}
       <div className="relative group">
         {/* Glow Effects */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-3xl opacity-20 blur transition duration-1000 group-hover:opacity-30" />
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-3xl opacity-10 dark:opacity-20 blur transition duration-1000 group-hover:opacity-20 dark:group-hover:opacity-30" />
         
-        <div className="relative bg-zinc-950/80 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="relative bg-card/80 backdrop-blur-xl border rounded-3xl overflow-hidden shadow-2xl shadow-black/5">
             
             {/* Progress Bar Line */}
-            <div className="h-1 w-full bg-zinc-800">
+            <div className="h-1 w-full bg-muted/50">
                 <div 
                     className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all duration-500 ease-out" 
                     style={{ width: `${progress}%` }}
@@ -120,7 +120,7 @@ export function QuizView() {
                         variant="ghost" 
                         size="icon"
                         onClick={() => setIsNoteOpen(!isNoteOpen)}
-                        className={cn("h-8 w-8 rounded-full hover:bg-white/10 transition-colors", (isNoteOpen || questionNotes[currentQuestionIndex]) ? "text-violet-400 bg-violet-500/10" : "text-zinc-500")}
+                        className={cn("h-8 w-8 rounded-full hover:bg-foreground/10 transition-colors", (isNoteOpen || questionNotes[currentQuestionIndex]) ? "text-primary bg-primary/10" : "text-muted-foreground")}
                         title="Add Note"
                      >
                         <FileEdit className="w-4 h-4" />
@@ -130,7 +130,7 @@ export function QuizView() {
                         size="icon"
                         onClick={handleShuffleOptions}
                         disabled={isChecked}
-                        className="h-8 w-8 rounded-full text-zinc-500 hover:text-white hover:bg-white/10 disabled:opacity-30 transition-colors"
+                        className="h-8 w-8 rounded-full text-muted-foreground hover:text-foreground hover:bg-foreground/10 disabled:opacity-30 transition-colors"
                         title="Shuffle Options"
                     >
                         <Shuffle className="w-4 h-4" />
@@ -141,7 +141,7 @@ export function QuizView() {
                 <div className="mb-8 min-h-[60px]">
                     <MarkdownRenderer 
                         content={q.question} 
-                        className="text-lg md:text-2xl text-zinc-100 font-medium leading-relaxed" 
+                        className="text-lg md:text-2xl text-foreground font-medium leading-relaxed" 
                     />
                 </div>
 
@@ -158,21 +158,21 @@ export function QuizView() {
                         if (isChecked) {
                             if (isCorrect) {
                                 containerClass += " bg-emerald-500/10 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.1)]";
-                                indicatorClass += " bg-emerald-500 text-black";
+                                indicatorClass += " bg-emerald-500 text-white";
                             } else if (isSelected) {
                                 containerClass += " bg-red-500/10 border-red-500/50";
                                 indicatorClass += " bg-red-500 text-white";
                             } else {
-                                containerClass += " bg-zinc-900/20 border-white/5 opacity-50 grayscale";
-                                indicatorClass += " bg-zinc-800 text-zinc-500";
+                                containerClass += " bg-muted/20 border-border opacity-50 grayscale";
+                                indicatorClass += " bg-muted text-muted-foreground";
                             }
                         } else {
                             if (isSelected) {
-                                containerClass += " bg-violet-600/20 border-violet-500 shadow-[0_0_15px_rgba(139,92,246,0.15)] ring-1 ring-violet-500/50";
-                                indicatorClass += " bg-violet-500 text-white";
+                                containerClass += " bg-primary/10 border-primary shadow-[0_0_15px_hsl(var(--primary)/0.15)] ring-1 ring-primary/50";
+                                indicatorClass += " bg-primary text-primary-foreground";
                             } else {
-                                containerClass += " bg-zinc-900/40 border-white/5 hover:bg-zinc-800/60 hover:border-white/10";
-                                indicatorClass += " bg-zinc-800 text-zinc-400 group-hover:bg-zinc-700 group-hover:text-zinc-200";
+                                containerClass += " bg-muted/40 border-border hover:bg-muted/60 hover:border-foreground/20";
+                                indicatorClass += " bg-muted text-muted-foreground group-hover:bg-foreground/20 group-hover:text-foreground";
                             }
                         }
 
@@ -190,14 +190,14 @@ export function QuizView() {
                                     <div className="flex-1 pt-1">
                                          <MarkdownRenderer 
                                             content={opt} 
-                                            className={cn("text-base leading-relaxed transition-colors", (isChecked && isCorrect) ? "text-emerald-100" : (isChecked && isSelected && !isCorrect) ? "text-red-100" : "text-zinc-300")} 
+                                            className={cn("text-base leading-relaxed transition-colors", (isChecked && isCorrect) ? "text-emerald-700 dark:text-emerald-200" : (isChecked && isSelected && !isCorrect) ? "text-red-700 dark:text-red-200" : "text-foreground/90")} 
                                         />
                                     </div>
                                     
                                     {/* Status Icons */}
                                     <div className="flex-shrink-0 w-6">
-                                        {isChecked && isCorrect && <CheckCircle2 className="w-6 h-6 text-emerald-400 animate-in zoom-in spin-in-12 duration-300" />}
-                                        {isChecked && isSelected && !isCorrect && <XCircle className="w-6 h-6 text-red-400 animate-in zoom-in duration-300" />}
+                                        {isChecked && isCorrect && <CheckCircle2 className="w-6 h-6 text-emerald-500 animate-in zoom-in spin-in-12 duration-300" />}
+                                        {isChecked && isSelected && !isCorrect && <XCircle className="w-6 h-6 text-red-500 animate-in zoom-in duration-300" />}
                                     </div>
                                 </div>
                             </button>
@@ -208,13 +208,13 @@ export function QuizView() {
                 {/* Explanation Area */}
                 {isChecked && isInstantMode && q.explanation && (
                     <div className="mt-8 animate-in slide-in-from-top-4 fade-in duration-500">
-                         <div className="bg-blue-950/30 border border-blue-500/20 rounded-xl p-5 overflow-hidden relative">
+                         <div className="bg-blue-500/5 border border-blue-500/20 rounded-xl p-5 overflow-hidden relative">
                              <div className="absolute top-0 left-0 w-1 h-full bg-blue-500/50" />
                              <div className="flex items-start gap-3">
-                                 <Lightbulb className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                                 <Lightbulb className="w-5 h-5 text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                                  <div className="space-y-2">
-                                     <h4 className="text-sm font-semibold text-blue-300 uppercase tracking-wide">Explanation</h4>
-                                     <MarkdownRenderer content={q.explanation} className="text-sm text-blue-100/80 leading-relaxed" />
+                                     <h4 className="text-sm font-semibold text-blue-600 dark:text-blue-300 uppercase tracking-wide">Explanation</h4>
+                                     <MarkdownRenderer content={q.explanation} className="text-sm text-blue-900/80 dark:text-blue-100/80 leading-relaxed" />
                                  </div>
                              </div>
                          </div>
@@ -223,12 +223,12 @@ export function QuizView() {
 
                 {/* Note Area */}
                 {isNoteOpen && (
-                    <div className="mt-6 pt-6 border-t border-white/5 animate-in slide-in-from-top-2 fade-in">
-                        <Label className="text-xs text-zinc-500 mb-2 block uppercase tracking-wider font-semibold">Your Notes</Label>
+                    <div className="mt-6 pt-6 border-t border-border animate-in slide-in-from-top-2 fade-in">
+                        <Label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider font-semibold">Your Notes</Label>
                         <Textarea
                             value={questionNotes[currentQuestionIndex] || ''}
                             onChange={(e) => setQuestionNotes(prev => ({ ...prev, [currentQuestionIndex]: e.target.value }))}
-                            className="w-full bg-zinc-900/50 border-white/10 rounded-xl p-4 text-sm text-zinc-300 focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 placeholder:text-zinc-700 min-h-[100px] resize-y"
+                            className="w-full bg-muted/40 border-input rounded-xl p-4 text-sm focus:border-primary/50 focus:ring-1 focus:ring-primary/50 placeholder:text-muted-foreground min-h-[100px] resize-y"
                             placeholder="Write down your thoughts, calculations, or reminders for this question..."
                         />
                     </div>
@@ -244,7 +244,7 @@ export function QuizView() {
             variant="ghost" 
             onClick={handlePrev} 
             disabled={currentQuestionIndex === 0} 
-            className="text-zinc-400 hover:text-white hover:bg-white/5 h-12 px-6 rounded-full disabled:opacity-0"
+            className="text-muted-foreground hover:text-foreground hover:bg-muted h-12 px-6 rounded-full disabled:opacity-0"
          >
            <ChevronLeft className="w-5 h-5 mr-2" /> Previous
          </Button>
@@ -254,7 +254,7 @@ export function QuizView() {
             {isInstantMode && !isChecked && (
                 <Button 
                     onClick={handleCheckAnswer} 
-                    className="bg-zinc-100 hover:bg-white text-zinc-900 font-bold h-12 px-8 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] transition-all"
+                    className="bg-foreground hover:bg-foreground/90 text-background font-bold h-12 px-8 rounded-full shadow-lg shadow-black/10 transition-all"
                 >
                     Check <RefreshCw className="w-4 h-4 ml-2" />
                 </Button>
@@ -265,7 +265,7 @@ export function QuizView() {
                 !isLast ? (
                     <Button 
                         onClick={handleNext} 
-                        className="bg-violet-600 hover:bg-violet-500 text-white font-semibold h-12 px-8 rounded-full shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 transition-all hover:-translate-y-0.5"
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-12 px-8 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:-translate-y-0.5"
                     >
                         Next Question <ChevronRight className="w-5 h-5 ml-2" />
                     </Button>

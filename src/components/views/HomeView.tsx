@@ -59,16 +59,16 @@ const SelectableCard = ({
     className={cn(
       "cursor-pointer group relative flex flex-col items-center justify-center p-4 rounded-xl border transition-all duration-300 overflow-hidden",
       selected 
-        ? "bg-violet-600/20 border-violet-500/50 shadow-[0_0_20px_rgba(139,92,246,0.15)]" 
-        : "bg-zinc-900/40 border-white/5 hover:border-white/10 hover:bg-zinc-800/40"
+        ? "bg-primary/10 border-primary/50 shadow-[0_0_20px_hsl(var(--primary)_/_0.15)]" 
+        : "bg-muted/30 border-border hover:border-foreground/20 hover:bg-muted"
     )}
   >
-    <div className={cn("mb-2 p-2 rounded-full transition-colors", selected ? "bg-violet-500 text-white" : "bg-white/5 text-zinc-400 group-hover:text-zinc-200")}>
+    <div className={cn("mb-2 p-2 rounded-full transition-colors", selected ? "bg-primary text-primary-foreground" : "bg-foreground/5 text-muted-foreground group-hover:text-foreground")}>
       <Icon className="w-5 h-5" />
     </div>
-    <span className={cn("text-xs font-semibold tracking-wide", selected ? "text-violet-200" : "text-zinc-400")}>{label}</span>
-    {subLabel && <span className="text-[10px] text-zinc-500 mt-1">{subLabel}</span>}
-    {selected && <div className="absolute inset-0 border-2 border-violet-500/30 rounded-xl pointer-events-none" />}
+    <span className={cn("text-xs font-semibold tracking-wide", selected ? "text-primary" : "text-muted-foreground")}>{label}</span>
+    {subLabel && <span className="text-[10px] text-muted-foreground/80 mt-1">{subLabel}</span>}
+    {selected && <div className="absolute inset-0 border-2 border-primary/30 rounded-xl pointer-events-none" />}
   </div>
 );
 
@@ -125,10 +125,10 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
         <form onSubmit={form.handleSubmit(handleGenerateQuiz)} className="relative z-10">
           
           {/* Main Card */}
-          <div className="bg-zinc-950/70 backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+          <div className="bg-card/70 backdrop-blur-2xl border rounded-3xl overflow-hidden shadow-2xl shadow-black/5">
             
             {/* Header Gradient Strip */}
-            <div className="h-2 w-full bg-gradient-to-r from-violet-600 via-fuchsia-500 to-blue-600" />
+            <div className="h-2 w-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-blue-500" />
             
             <div className="p-6 md:p-8 space-y-8">
               
@@ -139,17 +139,17 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                   name="topic"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-medium text-zinc-400 flex items-center gap-2">
-                        <Wand2 className="w-4 h-4 text-violet-400" /> What do you want to learn?
+                      <FormLabel className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                        <Wand2 className="w-4 h-4 text-primary" /> What do you want to learn?
                       </FormLabel>
                       <FormControl>
                         <div className="relative group">
                           <Input
                             placeholder="e.g. Molecular Biology, React Hooks, World War II..."
-                            className="w-full h-16 px-6 text-xl bg-zinc-900/50 border-zinc-800 rounded-2xl text-white placeholder:text-zinc-600 focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all shadow-inner"
+                            className="w-full h-16 px-6 text-xl bg-background/50 border-input rounded-2xl placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-inner"
                             {...field}
                           />
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-violet-500 transition-colors duration-300 pointer-events-none">
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors duration-300 pointer-events-none">
                             <Sparkles className="w-6 h-6" />
                           </div>
                         </div>
@@ -164,7 +164,7 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                   <button
                     type="button"
                     onClick={() => setIsContextOpen(!isContextOpen)}
-                    className="flex items-center gap-2 text-xs font-medium text-zinc-500 hover:text-violet-400 transition-colors"
+                    className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-primary transition-colors"
                   >
                     {isContextOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                     {isContextOpen ? "Hide Source Material" : "Add Source Material (Optional)"}
@@ -178,7 +178,7 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                         <div className="mt-3 animate-in slide-in-from-top-2 fade-in duration-200">
                           <Textarea
                             placeholder="Paste your notes, article text, or documentation here to generate questions based specifically on this content..."
-                            className="min-h-[120px] bg-zinc-900/50 border-zinc-800 rounded-xl text-zinc-300 text-sm focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50"
+                            className="min-h-[120px] bg-background/50 border-input rounded-xl text-sm focus:border-primary/50 focus:ring-1 focus:ring-primary/50"
                             {...field}
                           />
                         </div>
@@ -188,7 +188,7 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                 </div>
               </div>
 
-              <div className="h-px w-full bg-white/5" />
+              <div className="h-px w-full bg-border" />
 
               {/* SETTINGS GRID */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -199,7 +199,7 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                   name="difficulty"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel className="text-xs uppercase tracking-wider text-zinc-500 font-semibold pl-1">Difficulty Level</FormLabel>
+                      <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-semibold pl-1">Difficulty Level</FormLabel>
                       <div className="grid grid-cols-3 gap-3">
                         {['Easy', 'Medium', 'Hard'].map((level) => (
                           <SelectableCard
@@ -221,8 +221,8 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                   name="questionCount"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel className="text-xs uppercase tracking-wider text-zinc-500 font-semibold pl-1">Number of Questions</FormLabel>
-                      <div className="bg-zinc-900/40 p-1.5 rounded-xl border border-white/5 flex gap-1 items-center">
+                      <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-semibold pl-1">Number of Questions</FormLabel>
+                      <div className="bg-muted/40 p-1.5 rounded-xl border flex gap-1 items-center">
                         {[5, 10, 15].map((num) => (
                           <Button
                             type="button"
@@ -232,20 +232,20 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                             className={cn(
                               "flex-1 h-9 rounded-lg text-xs font-medium transition-all",
                               field.value === num 
-                                ? "bg-zinc-800 text-white shadow-sm ring-1 ring-white/10" 
-                                : "text-zinc-500 hover:text-zinc-300 hover:bg-white/5"
+                                ? "bg-background text-foreground shadow-sm ring-1 ring-border" 
+                                : "text-muted-foreground hover:text-foreground hover:bg-background/30"
                             )}
                           >
                             {num}
                           </Button>
                         ))}
-                        <div className="w-px h-6 bg-white/10 mx-1" />
+                        <div className="w-px h-6 bg-border mx-1" />
                         <Input 
                           type="number" 
                           min="1" 
                           max="30" 
                           {...field} 
-                          className="w-16 h-9 bg-transparent border-none text-center text-sm font-semibold focus-visible:ring-0 px-0 text-violet-400 placeholder:text-zinc-700"
+                          className="w-16 h-9 bg-transparent border-none text-center text-sm font-semibold focus-visible:ring-0 px-0 text-primary placeholder:text-muted-foreground"
                         />
                       </div>
                     </FormItem>
@@ -258,7 +258,7 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                   name="quizStyle"
                   render={({ field }) => (
                     <FormItem className="md:col-span-2 space-y-3">
-                       <FormLabel className="text-xs uppercase tracking-wider text-zinc-500 font-semibold pl-1">Quiz Style</FormLabel>
+                       <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-semibold pl-1">Quiz Style</FormLabel>
                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                           {[
                             { id: 'General', icon: Layers, sub: 'Standard Mix' }, 
@@ -282,20 +282,20 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
 
               {/* FOOTER ACTIONS */}
               <div className="grid sm:grid-cols-2 gap-4 items-center pt-4">
-                 <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/5">
+                 <div className="flex items-center gap-3 bg-muted/40 px-4 py-2 rounded-full border">
                     <Switch 
                       id="instant-mode-ai"
                       checked={isInstantMode} 
                       onCheckedChange={setIsInstantMode} 
                       className="data-[state=checked]:bg-emerald-500"
                     />
-                    <Label htmlFor="instant-mode-ai" className="text-sm text-zinc-300 font-normal cursor-pointer">Instant Feedback</Label>
+                    <Label htmlFor="instant-mode-ai" className="text-sm text-foreground/80 font-normal cursor-pointer">Instant Feedback</Label>
                  </div>
                  <FormField
                   control={form.control}
                   name="withExplanations"
                   render={({ field }) => (
-                    <FormItem className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/5">
+                    <FormItem className="flex items-center gap-3 bg-muted/40 px-4 py-2 rounded-full border">
                       <FormControl>
                         <Switch
                           id="with-explanations"
@@ -304,7 +304,7 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                           className="data-[state=checked]:bg-blue-500"
                         />
                       </FormControl>
-                      <FormLabel htmlFor="with-explanations" className="text-sm text-zinc-300 font-normal cursor-pointer flex-1">
+                      <FormLabel htmlFor="with-explanations" className="text-sm text-foreground/80 font-normal cursor-pointer flex-1">
                         Include Explanations
                       </FormLabel>
                     </FormItem>
@@ -315,12 +315,12 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                     <Button 
                         type="submit" 
                         disabled={isGenerating} 
-                        className="w-full sm:w-auto h-12 px-8 text-base bg-white text-black hover:bg-zinc-200 transition-all font-semibold rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                        className="w-full sm:w-auto h-12 px-8 text-base bg-foreground text-background hover:bg-foreground/90 transition-all font-semibold rounded-full shadow-lg shadow-black/10 dark:shadow-black/20"
                     >
                       {isGenerating ? (
                         <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Creating...</>
                       ) : (
-                        <><Zap className="w-5 h-5 mr-2 fill-black" /> Generate Quiz</>
+                        <><Zap className="w-5 h-5 mr-2 fill-current" /> Generate Quiz</>
                       )}
                     </Button>
                  </div>
@@ -334,17 +334,17 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
       {/* SUCCESS CARD */}
       {generatedQuizSummary && (
         <div className="animate-in slide-in-from-bottom-6 duration-700 fade-in">
-          <div className="group relative bg-emerald-950/30 backdrop-blur-xl border border-emerald-500/30 rounded-2xl p-1 overflow-hidden">
+          <div className="group relative bg-emerald-500/10 backdrop-blur-xl border border-emerald-500/30 rounded-2xl p-1 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
             <div className="relative p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-emerald-500/20 rounded-xl text-emerald-400 shadow-inner ring-1 ring-emerald-500/20">
+                <div className="p-3 bg-emerald-500/20 rounded-xl text-emerald-500 shadow-inner ring-1 ring-emerald-500/20">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-1">{generatedQuizSummary.title}</h3>
-                  <p className="text-emerald-200/60 text-sm flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-foreground mb-1">{generatedQuizSummary.title}</h3>
+                  <p className="text-emerald-500/80 dark:text-emerald-400/70 text-sm flex items-center gap-2">
                     <span className="bg-emerald-500/10 px-2 py-0.5 rounded text-xs border border-emerald-500/20">Ready to Play</span>
                     • {generatedQuizSummary.questions.length} Questions
                   </p>
@@ -355,14 +355,14 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
                 <Button 
                   onClick={handleViewJson}
                   variant="outline"
-                  className="flex-1 sm:flex-none bg-transparent border-emerald-500/30 hover:bg-emerald-500/10 text-emerald-400 font-bold h-11 px-6 rounded-xl"
+                  className="flex-1 sm:flex-none bg-transparent border-emerald-500/30 hover:bg-emerald-500/10 text-emerald-500 font-bold h-11 px-6 rounded-xl"
                 >
                   <Code2 />
                   View JSON
                 </Button>
                 <Button 
                   onClick={() => startQuiz(generatedQuizSummary, isInstantMode)} 
-                  className="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold h-11 px-6 rounded-xl"
+                  className="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-600 text-white dark:text-emerald-950 font-bold h-11 px-6 rounded-xl"
                 >
                   Start Quiz
                 </Button>
@@ -422,29 +422,29 @@ function JsonEditor({ setHomeTab, jsonInput, setJsonInput }: { setHomeTab: (tab:
              
              {/* Sidebar: Settings & Help */}
              <div className="space-y-6">
-                <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/5 rounded-2xl p-5 space-y-5">
-                   <h3 className="font-semibold text-zinc-200 flex items-center gap-2">
-                     <FileJson className="w-4 h-4 text-violet-400" /> Editor Settings
+                <div className="bg-card/50 backdrop-blur-xl border rounded-2xl p-5 space-y-5">
+                   <h3 className="font-semibold text-foreground/80 flex items-center gap-2">
+                     <FileJson className="w-4 h-4 text-primary" /> Editor Settings
                    </h3>
                    
                    <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="instant-mode-json" className="text-sm text-zinc-400">Instant Feedback</Label>
+                        <Label htmlFor="instant-mode-json" className="text-sm text-muted-foreground">Instant Feedback</Label>
                         <Switch id="instant-mode-json" checked={isInstantMode} onCheckedChange={setIsInstantMode} />
                       </div>
-                      <div className="h-px bg-white/5" />
+                      <div className="h-px bg-border" />
                       <div className="grid grid-cols-2 gap-2">
-                         <Button variant="secondary" onClick={loadSample} className="bg-white/5 hover:bg-white/10 text-xs h-8">Load Sample</Button>
-                         <Button variant="outline" onClick={() => { setJsonInput(''); setQuizName(''); }} className="border-white/10 hover:bg-white/5 bg-transparent text-xs h-8">Clear</Button>
+                         <Button variant="secondary" onClick={loadSample} className="text-xs h-8">Load Sample</Button>
+                         <Button variant="outline" onClick={() => { setJsonInput(''); setQuizName(''); }} className="text-xs h-8">Clear</Button>
                       </div>
                    </div>
                 </div>
 
                 <div className="bg-blue-500/5 border border-blue-500/10 rounded-2xl p-5">
-                   <h4 className="text-blue-200 text-sm font-medium mb-2 flex items-center gap-2">
+                   <h4 className="text-blue-500 dark:text-blue-400 text-sm font-medium mb-2 flex items-center gap-2">
                       <Code2 className="w-4 h-4" /> Structure Guide
                    </h4>
-                   <pre className="text-[10px] text-blue-200/60 font-mono overflow-x-auto p-2 bg-black/20 rounded-lg">
+                   <pre className="text-[10px] text-blue-500/70 dark:text-blue-400/60 font-mono overflow-x-auto p-2 bg-black/5 dark:bg-black/20 rounded-lg">
 {`{
   "title": "String",
   "questions": [
@@ -462,20 +462,20 @@ function JsonEditor({ setHomeTab, jsonInput, setJsonInput }: { setHomeTab: (tab:
              
              {/* Main Editor */}
              <div className="lg:col-span-2 flex flex-col gap-4">
-                <div className="bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex-1 flex flex-col min-h-[400px]">
-                    <div className="bg-zinc-900/50 px-4 py-3 border-b border-white/5 flex items-center justify-between">
+                <div className="bg-background border rounded-2xl overflow-hidden shadow-lg shadow-black/5 flex-1 flex flex-col min-h-[400px]">
+                    <div className="bg-muted/30 px-4 py-3 border-b flex items-center justify-between">
                         <div className="flex gap-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
-                            <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-                            <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
+                            <div className="w-3 h-3 rounded-full bg-red-500/50 border border-red-500/80" />
+                            <div className="w-3 h-3 rounded-full bg-yellow-500/50 border border-yellow-500/80" />
+                            <div className="w-3 h-3 rounded-full bg-green-500/50 border border-green-500/80" />
                         </div>
-                        <span className="text-xs text-zinc-500 font-mono">quiz_data.json</span>
+                        <span className="text-xs text-muted-foreground font-mono">quiz_data.json</span>
                     </div>
                     
                     <Textarea
                         value={jsonInput}
                         onChange={(e) => setJsonInput(e.target.value)}
-                        className="flex-1 w-full h-full bg-transparent border-none rounded-none p-4 font-mono text-sm text-zinc-300 focus-visible:ring-0 leading-relaxed resize-none placeholder:text-zinc-700"
+                        className="flex-1 w-full h-full bg-transparent border-none rounded-none p-4 font-mono text-sm focus-visible:ring-0 leading-relaxed resize-none placeholder:text-muted-foreground"
                         placeholder="// Paste your JSON here..."
                         spellCheck={false}
                     />
@@ -486,10 +486,10 @@ function JsonEditor({ setHomeTab, jsonInput, setJsonInput }: { setHomeTab: (tab:
                         placeholder="Quiz Title (Optional override)" 
                         value={quizName}
                         onChange={(e) => setQuizName(e.target.value)}
-                        className="bg-zinc-900/50 border-white/10 h-12"
+                        className="bg-card h-12"
                    />
-                   <Button onClick={handleParseAndStart} className="bg-violet-600 hover:bg-violet-500 text-white h-12 px-6">
-                        <Play className="w-4 h-4 fill-white mr-2" /> Run
+                   <Button onClick={handleParseAndStart} className="bg-primary hover:bg-primary/90 text-primary-foreground h-12 px-6">
+                        <Play className="w-4 h-4 fill-current mr-2" /> Run
                    </Button>
                 </div>
              </div>
@@ -503,57 +503,63 @@ function JsonEditor({ setHomeTab, jsonInput, setJsonInput }: { setHomeTab: (tab:
 export function HomeView() {
   const [homeTab, setHomeTab] = useState<'ai' | 'json'>('ai');
   const [jsonInputForEditor, setJsonInputForEditor] = useState('');
+  const { theme } = useQuiz();
 
   return (
-    <div className="min-h-screen w-full text-zinc-100 flex flex-col items-center pt-8 pb-20 px-4 relative overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col items-center pt-8 pb-20 px-4 relative overflow-hidden">
       
       {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none">
-         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-700/10 blur-[120px] rounded-full mix-blend-screen" />
-         <div className="absolute top-[20%] right-[-10%] w-[30%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full mix-blend-screen" />
-         <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[30%] bg-fuchsia-600/10 blur-[100px] rounded-full mix-blend-screen" />
+         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-700/10 blur-[120px] rounded-full" />
+         <div className="absolute top-[20%] right-[-10%] w-[30%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full" />
+         <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[30%] bg-fuchsia-600/10 blur-[100px] rounded-full" />
       </div>
 
       <div className="w-full max-w-5xl z-10">
         
         {/* Header Section */}
         <div className="text-center mb-10 space-y-4">
-          <div className="inline-flex items-center justify-center px-3 py-1 rounded-full border border-violet-500/20 bg-violet-500/10 text-violet-300 text-xs font-medium mb-4">
+          <div className="inline-flex items-center justify-center px-3 py-1 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-medium mb-4">
             <Sparkles className="w-3 h-3 mr-2" /> AI-Powered Learning
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-zinc-500">
+          <h1 className={cn(
+            "text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent",
+            theme === 'dark' 
+              ? "bg-gradient-to-b from-white via-white to-zinc-500" 
+              : "bg-gradient-to-b from-black/80 via-black/80 to-black/50"
+          )}>
             MCQ Master
           </h1>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Generate comprehensive quizzes instantly with AI or code your own custom challenges.
           </p>
         </div>
 
         {/* Custom Tab Navigation */}
         <div className="flex justify-center mb-10">
-          <div className="p-1.5 bg-zinc-950/80 backdrop-blur-md border border-white/5 rounded-2xl flex items-center relative gap-1 shadow-2xl">
+          <div className="p-1.5 bg-muted/80 backdrop-blur-md border rounded-2xl flex items-center relative gap-1 shadow-lg shadow-black/5">
             <button
               onClick={() => setHomeTab('ai')}
               className={cn(
                 "relative z-10 flex items-center gap-2 px-8 py-3 rounded-xl text-sm font-semibold transition-all duration-300",
-                homeTab === 'ai' ? "text-white" : "text-zinc-500 hover:text-zinc-300"
+                homeTab === 'ai' ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               )}
             >
               <Wand2 className="w-4 h-4" /> AI Generator
               {homeTab === 'ai' && (
-                <div className="absolute inset-0 bg-zinc-800 rounded-xl -z-10 shadow-lg border border-white/5" />
+                <div className="absolute inset-0 bg-background rounded-xl -z-10 shadow-md border" />
               )}
             </button>
             <button
               onClick={() => setHomeTab('json')}
               className={cn(
                 "relative z-10 flex items-center gap-2 px-8 py-3 rounded-xl text-sm font-semibold transition-all duration-300",
-                homeTab === 'json' ? "text-white" : "text-zinc-500 hover:text-zinc-300"
+                homeTab === 'json' ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               )}
             >
               <Code2 className="w-4 h-4" /> JSON Editor
               {homeTab === 'json' && (
-                 <div className="absolute inset-0 bg-zinc-800 rounded-xl -z-10 shadow-lg border border-white/5" />
+                 <div className="absolute inset-0 bg-background rounded-xl -z-10 shadow-md border" />
               )}
             </button>
           </div>
@@ -569,5 +575,3 @@ export function HomeView() {
     </div>
   );
 }
-
-    

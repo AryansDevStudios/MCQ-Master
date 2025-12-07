@@ -5,11 +5,17 @@ import type { Quiz, QuizAttempt, ViewState, Toast } from '@/lib/types';
 
 const LOCAL_STORAGE_SAVED_KEY = 'mcq_saved_quizzes';
 const LOCAL_STORAGE_HISTORY_KEY = 'mcq_history';
+const LOCAL_STORAGE_THEME_KEY = 'mcq_theme';
+
+type Theme = 'light' | 'dark';
 
 interface QuizContextType {
   view: ViewState;
   setView: (view: ViewState) => void;
   
+  theme: Theme;
+  toggleTheme: () => void;
+
   savedQuizzes: Quiz[];
   history: QuizAttempt[];
   
@@ -48,6 +54,9 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Navigation State
   const [view, setView] = useState<ViewState>('home');
   
+  // Theme State
+  const [theme, setTheme] = useState<Theme>('dark');
+  
   // Data State
   const [savedQuizzes, setSavedQuizzes] = useState<Quiz[]>([]);
   const [history, setHistory] = useState<QuizAttempt[]>([]);
@@ -73,10 +82,21 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_SAVED_KEY);
       const hist = localStorage.getItem(LOCAL_STORAGE_HISTORY_KEY);
+      const storedTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY);
+      
       if (saved) setSavedQuizzes(JSON.parse(saved));
       if (hist) setHistory(JSON.parse(hist));
+      if (storedTheme && (storedTheme === 'light' || storedTheme === 'dark')) {
+        setTheme(storedTheme);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+
     } catch (e) {
       console.error("Failed to load from local storage", e);
+      setTheme('dark');
     }
   }, []);
 
@@ -89,8 +109,16 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
     return () => clearInterval(interval);
   }, [isTimerRunning]);
-
+  
   // --- Actions ---
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => {
+        const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+        localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
+        return newTheme;
+    });
+  };
 
   const addToast = useCallback((message: string, type: Toast['type'] = 'info') => {
     const id = Date.now().toString();
@@ -230,6 +258,7 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   return (
     <QuizContext.Provider value={{
       view, setView,
+      theme, toggleTheme,
       savedQuizzes, history,
       activeQuiz, userAnswers, questionNotes, currentQuestionIndex,
       isInstantMode, checkedQuestions, elapsedSeconds, isTimerRunning,

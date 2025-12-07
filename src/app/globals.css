@@ -8,41 +8,41 @@ body {
 
 @layer base {
   :root {
-    --background: 225 43% 11%;
-    --foreground: 220 20% 96%;
+    --background: 0 0% 100%;
+    --foreground: 225 43% 11%;
     
-    --card: 260 23% 18% / 0.7;
-    --card-foreground: 220 20% 96%;
+    --card: 0 0% 96%;
+    --card-foreground: 225 43% 11%;
     
-    --popover: 260 23% 14%;
-    --popover-foreground: 220 20% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 43% 11%;
     
-    --primary: 260 59% 61%;
+    --primary: 260 59% 51%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 230 58% 54%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 230 58% 94%;
+    --secondary-foreground: 230 58% 24%;
     
-    --muted: 240 5% 25%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 240 5% 90%;
+    --muted-foreground: 240 5% 45%;
     
-    --accent: 230 58% 54%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 230 58% 94%;
+    --accent-foreground: 230 58% 24%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 240 4% 30%;
-    --input: 240 5% 25% / 0.5;
-    --ring: 260 59% 61%;
+    --border: 240 4% 88%;
+    --input: 240 4% 88%;
+    --ring: 260 59% 51%;
     
     --radius: 0.75rem;
 
-    --chart-1: 142 71% 45%; /* emerald-500 */
-    --chart-2: 0 80% 63%; /* red-500 */
-    --chart-3: 48 96% 61%; /* yellow-400 */
-    --chart-4: 260 59% 61%; /* primary */
-    --chart-5: 230 58% 54%; /* accent */
+    --chart-1: 142 71% 45%;
+    --chart-2: 0 80% 63%;
+    --chart-3: 48 96% 61%;
+    --chart-4: 260 59% 61%;
+    --chart-5: 230 58% 54%;
   }
 
   .dark {
