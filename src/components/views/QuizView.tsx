@@ -98,7 +98,7 @@ export function QuizView() {
               const isSelected = userAnswers[currentQuestionIndex] === idx;
               const isCorrect = q.correctAnswer === idx;
               
-              let optionClass = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center justify-between group h-auto text-base";
+              let optionClass = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-start justify-between group h-auto text-base";
               if (isChecked) {
                 if (isCorrect) optionClass += " border-emerald-500 bg-emerald-500/10 text-emerald-100";
                 else if (isSelected) optionClass += " border-red-500 bg-red-500/10 text-red-100";
@@ -110,14 +110,14 @@ export function QuizView() {
 
               return (
                 <Button key={idx} onClick={() => handleOptionSelect(idx)} disabled={isChecked} className={cn(optionClass, 'justify-start')}>
-                  <div className="flex items-center gap-4 w-full">
-                    <span className={cn('flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold', isSelected || (isChecked && isCorrect) ? 'bg-white/20' : 'bg-white/5')}>
+                  <div className="flex items-start gap-4 w-full">
+                    <span className={cn('flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold mt-0.5', isSelected || (isChecked && isCorrect) ? 'bg-white/20' : 'bg-white/5')}>
                       {String.fromCharCode(65 + idx)}
                     </span>
-                    <MarkdownRenderer content={opt} className="text-lg" />
+                    <MarkdownRenderer content={opt} className="text-lg text-left flex-1" />
                   </div>
-                  {isChecked && isCorrect && <CheckCircle2 className="w-6 h-6 text-emerald-400" />}
-                  {isChecked && isSelected && !isCorrect && <XCircle className="w-6 h-6 text-red-400" />}
+                  {isChecked && isCorrect && <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0" />}
+                  {isChecked && isSelected && !isCorrect && <XCircle className="w-6 h-6 text-red-400 flex-shrink-0" />}
                 </Button>
               );
             })}

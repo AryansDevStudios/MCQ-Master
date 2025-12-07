@@ -14,11 +14,11 @@ interface MarkdownRendererProps {
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className }) => {
   return (
     <ReactMarkdown
-      className={cn('prose prose-invert prose-p:my-0 prose-strong:text-inherit', className)}
+      className={cn('prose prose-invert prose-p:my-0 prose-strong:text-inherit max-w-none', className)}
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeKatex]}
       components={{
-        p: (props) => <span {...props} />,
+        p: ({node, ...props}) => <span className="inline" {...props} />,
       }}
     >
       {content}
