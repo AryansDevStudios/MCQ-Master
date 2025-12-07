@@ -32,7 +32,7 @@ import * as z from "zod";
 const formSchema = z.object({
   topic: z.string().min(1, 'Please enter a topic.'),
   context: z.string().optional(),
-  questionCount: z.coerce.number().min(1).max(50),
+  questionCount: z.coerce.number().min(1).max(30),
   difficulty: z.string(),
   quizStyle: z.string(),
 });
@@ -233,7 +233,7 @@ function AiGenerator() {
                         <Input 
                           type="number" 
                           min="1" 
-                          max="50" 
+                          max="30" 
                           {...field} 
                           className="w-16 h-9 bg-transparent border-none text-center text-sm font-semibold focus-visible:ring-0 px-0 text-violet-400 placeholder:text-zinc-700"
                         />
@@ -524,3 +524,5 @@ export function HomeView() {
     </div>
   );
 }
+
+    
