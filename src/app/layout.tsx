@@ -45,12 +45,6 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <head>
         <title>MCQ Master</title>
         <meta name="description" content="A premium AI-powered practice platform for quizzes with Markdown and LaTeX support." />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
-          integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvMSheGMkindg"
-          crossOrigin="anonymous"
-        />
       </head>
       <body className={cn('min-h-screen bg-background font-body antialiased', fontBody.variable, fontHeadline.variable)}>
           <div className="min-h-screen flex flex-col">
