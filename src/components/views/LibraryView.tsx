@@ -58,7 +58,7 @@ export function LibraryView() {
             {savedQuizzes.map((quiz) => (
               <Card 
                 key={quiz.title} 
-                className="group bg-dark-card p-5 rounded-xl hover:border-primary/50 hover:bg-white/5 transition-all cursor-pointer relative overflow-hidden"
+                className="group bg-dark-card p-5 rounded-xl hover:border-primary/50 hover:bg-white/5 transition-all duration-300 ease-in-out hover:scale-[1.02] cursor-pointer relative overflow-hidden"
               >
                 <div onClick={() => startQuiz(quiz)}>
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity" />
