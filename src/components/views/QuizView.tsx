@@ -104,8 +104,8 @@ export function QuizView() {
                 else if (isSelected) optionClass += " border-red-500 bg-red-500/10 text-red-100";
                 else optionClass += " border-white/5 opacity-60";
               } else {
-                if (isSelected) optionClass += " border-primary bg-primary/10 text-white shadow-lg shadow-primary/10";
-                else optionClass += " border-white/5 hover:bg-white/5 hover:border-slate-500 text-slate-300";
+                if (isSelected) optionClass += " border-primary bg-primary/20 text-white shadow-lg shadow-primary/10";
+                else optionClass += " border-slate-700 bg-slate-800/20 hover:bg-slate-700/40 hover:border-slate-600 text-slate-300";
               }
 
               return (
