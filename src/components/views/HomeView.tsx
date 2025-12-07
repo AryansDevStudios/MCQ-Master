@@ -479,7 +479,7 @@ export function HomeView() {
       
       {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none">
-         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-700/10 blur-[120px] rounded-full mix-blend-screen animate-pulse" />
+         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-700/10 blur-[120px] rounded-full mix-blend-screen" />
          <div className="absolute top-[20%] right-[-10%] w-[30%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full mix-blend-screen" />
          <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[30%] bg-fuchsia-600/10 blur-[100px] rounded-full mix-blend-screen" />
       </div>
