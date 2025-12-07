@@ -1,10 +1,11 @@
 'use client';
 import { useState } from 'react';
 import { 
-  Sparkles, Code2, BookOpen, BarChart3, Layers, 
+  Sparkles, Code2, BookOpen, Layers, 
   BrainCircuit, ChevronDown, ChevronUp, ScrollText, 
   CheckCircle2, Loader2, FileJson, Play, 
-  Wand2, Zap, GraduationCap, Microscope, Calculator
+  Wand2, Zap, GraduationCap, Microscope, Calculator,
+  Lightbulb
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,6 +36,7 @@ const formSchema = z.object({
   questionCount: z.coerce.number().min(1).max(30),
   difficulty: z.string(),
   quizStyle: z.string(),
+  withExplanations: z.boolean(),
 });
 
 // --- Helper Components ---
@@ -86,6 +88,7 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
       questionCount: 5,
       difficulty: "Medium",
       quizStyle: "General",
+      withExplanations: true,
     },
   });
 
@@ -278,27 +281,49 @@ function AiGenerator({ setHomeTab, setJsonInputForEditor }: { setHomeTab: (tab: 
               </div>
 
               {/* FOOTER ACTIONS */}
-              <div className="flex flex-col sm:flex-row items-center justify-between pt-4 gap-4">
+              <div className="grid sm:grid-cols-2 gap-4 items-center pt-4">
                  <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/5">
                     <Switch 
+                      id="instant-mode-ai"
                       checked={isInstantMode} 
                       onCheckedChange={setIsInstantMode} 
                       className="data-[state=checked]:bg-emerald-500"
                     />
-                    <Label className="text-sm text-zinc-300 font-normal cursor-pointer">Instant Feedback Mode</Label>
+                    <Label htmlFor="instant-mode-ai" className="text-sm text-zinc-300 font-normal cursor-pointer">Instant Feedback</Label>
                  </div>
+                 <FormField
+                  control={form.control}
+                  name="withExplanations"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/5">
+                      <FormControl>
+                        <Switch
+                          id="with-explanations"
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          className="data-[state=checked]:bg-blue-500"
+                        />
+                      </FormControl>
+                      <FormLabel htmlFor="with-explanations" className="text-sm text-zinc-300 font-normal cursor-pointer flex-1">
+                        Include Explanations
+                      </FormLabel>
+                    </FormItem>
+                  )}
+                />
 
-                 <Button 
-                    type="submit" 
-                    disabled={isGenerating} 
-                    className="w-full sm:w-auto h-12 px-8 text-base bg-white text-black hover:bg-zinc-200 transition-all font-semibold rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
-                 >
-                   {isGenerating ? (
-                     <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Creating...</>
-                   ) : (
-                     <><Zap className="w-5 h-5 mr-2 fill-black" /> Generate Quiz</>
-                   )}
-                 </Button>
+                 <div className="sm:col-span-2 flex justify-end">
+                    <Button 
+                        type="submit" 
+                        disabled={isGenerating} 
+                        className="w-full sm:w-auto h-12 px-8 text-base bg-white text-black hover:bg-zinc-200 transition-all font-semibold rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                    >
+                      {isGenerating ? (
+                        <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Creating...</>
+                      ) : (
+                        <><Zap className="w-5 h-5 mr-2 fill-black" /> Generate Quiz</>
+                      )}
+                    </Button>
+                 </div>
               </div>
 
             </div>
@@ -379,6 +404,11 @@ function JsonEditor({ setHomeTab, jsonInput, setJsonInput }: { setHomeTab: (tab:
               options: ["Joule", "Newton", "Watt", "Pascal"],
               correctAnswer: 1,
               explanation: "The Newton (N) is the SI unit of force."
+            },
+            {
+              question: "What is Force?",
+              options: ["A push or pull", "Energy", "Power", "Work"],
+              correctAnswer: 0
             }
           ]
         };
@@ -422,7 +452,7 @@ function JsonEditor({ setHomeTab, jsonInput, setJsonInput }: { setHomeTab: (tab:
       "question": "String",
       "options": ["A","B","C","D"],
       "correctAnswer": 0,
-      "explanation": "String"
+      "explanation?": "String"
     }
   ]
 }`}

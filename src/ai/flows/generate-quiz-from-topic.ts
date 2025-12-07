@@ -17,6 +17,7 @@ const GenerateQuizFromTopicInputSchema = z.object({
   difficulty: z.string().describe('The difficulty level of the quiz (e.g., Easy, Medium, Hard).'),
   quizStyle: z.string().describe('The style of the quiz (e.g., General, Conceptual, Problem Solving).'),
   context: z.string().optional().describe('Context to use for generating the quiz questions.'),
+  withExplanations: z.boolean().optional().describe('Whether to generate explanations for the answers.'),
 });
 
 export type GenerateQuizFromTopicInput = z.infer<typeof GenerateQuizFromTopicInputSchema>;
@@ -43,7 +44,17 @@ const prompt = ai.definePrompt({
   name: 'generateQuizFromTopicPrompt',
   input: {schema: GenerateQuizFromTopicInputSchema},
   output: {schema: GenerateQuizFromTopicOutputSchema},
-  prompt: `You are a quiz generator. Generate a quiz on the topic of {{topic}} with {{questionCount}} questions. The difficulty level should be {{difficulty}} and the quiz style should be {{quizStyle}}.\n\n{% if context %}\nUse the following context to generate the quiz questions:\n{{context}}\n{% endif %}`,
+  prompt: `You are a quiz generator. Generate a quiz on the topic of {{topic}} with {{questionCount}} questions. The difficulty level should be {{difficulty}} and the quiz style should be {{quizStyle}}.
+{{#if withExplanations}}
+Each question MUST have an explanation.
+{{else}}
+Each question MUST NOT have an explanation.
+{{/if}}
+
+{{#if context}}
+Use the following context to generate the quiz questions:
+{{context}}
+{{/if}}`,
 });
 
 const generateQuizFromTopicFlow = ai.defineFlow(
