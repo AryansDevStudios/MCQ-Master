@@ -24,7 +24,7 @@ export function Header() {
           onClick={() => setView('home')}
         >
           <Logo />
-          <h1 className="text-xl font-bold tracking-tight text-white font-headline">QuizCraft AI</h1>
+          <h1 className="text-xl font-bold tracking-tight text-white font-headline">MCQ Master</h1>
         </Button>
 
         <nav className="flex items-center bg-white/5 rounded-full p-1 border border-white/10">

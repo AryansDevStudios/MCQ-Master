@@ -18,7 +18,7 @@ const fontHeadline = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'QuizCraft AI',
+  title: 'MCQ Master',
   description: 'A premium AI-powered practice platform for quizzes with Markdown and LaTeX support.',
 };
 
