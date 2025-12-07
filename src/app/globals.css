@@ -87,4 +87,14 @@ body {
   .bg-dark-card {
     @apply bg-card border border-white/5 backdrop-blur-xl;
   }
+
+  /* Hide number input arrows */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 }
