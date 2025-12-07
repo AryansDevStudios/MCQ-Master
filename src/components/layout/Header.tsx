@@ -27,7 +27,7 @@ export function Header() {
           <h1 className="text-xl font-bold tracking-tight text-white font-headline">MCQ Master</h1>
         </Button>
 
-        <nav className="flex items-center bg-white/5 rounded-full p-1 border border-white/10">
+        <nav className="flex items-center bg-white/5 rounded-full p-1 border border-white/10 gap-2.5">
           {navItems.map((item) => (
             <Button
               key={item.id}
