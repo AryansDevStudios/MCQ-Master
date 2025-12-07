@@ -99,9 +99,9 @@ export function QuizView() {
       </div>
 
       {/* --- MAIN CARD --- */}
-      <div className="relative group">
+      <div className="relative">
         {/* Glow Effects */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-3xl opacity-10 dark:opacity-20 blur transition duration-1000 group-hover:opacity-20 dark:group-hover:opacity-30" />
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-3xl opacity-10 dark:opacity-20 blur transition duration-1000" />
         
         <div className="relative bg-card/80 backdrop-blur-xl border rounded-3xl overflow-hidden shadow-2xl shadow-black/5">
             
