@@ -32,10 +32,6 @@ export function ResultsView() {
     wrong: { label: "Wrong", color: "hsl(var(--chart-2))" },
   }
 
-  const wrongIndices = attempt.quizData.questions
-    .map((_, index) => index)
-    .filter(index => attempt.userAnswers[index] !== attempt.quizData.questions[index].correctAnswer);
-
   return (
     <div className="max-w-4xl mx-auto w-full animate-in zoom-in-95 duration-500">
       <div className="text-center mb-8">
@@ -44,9 +40,9 @@ export function ResultsView() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 mb-8">
-        <Card className="bg-dark-card p-8 rounded-2xl flex flex-col items-center justify-center relative overflow-hidden">
+        <Card className="bg-dark-card p-6 rounded-2xl flex flex-col md:flex-row items-center justify-center relative overflow-hidden gap-6">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-          <div className="w-48 h-48">
+          <div className="w-48 h-48 relative">
             <ChartContainer config={chartConfig} className="w-full h-full">
               <ResponsiveContainer>
                 <PieChart>
@@ -59,13 +55,13 @@ export function ResultsView() {
                 </PieChart>
               </ResponsiveContainer>
             </ChartContainer>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center flex-col">
+              <span className="text-4xl font-bold text-white">{percentage}%</span>
+              <span className="text-xs text-slate-400 uppercase tracking-widest">Score</span>
+            </div>
           </div>
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[calc(50%-20px)] flex items-center justify-center flex-col">
-             <span className="text-4xl font-bold text-white">{percentage}%</span>
-             <span className="text-xs text-slate-400 uppercase tracking-widest">Score</span>
-           </div>
           
-          <div className="grid grid-cols-3 gap-6 w-full mt-6 text-center">
+          <div className="flex flex-col gap-4 text-center md:text-left">
             <div>
               <div className="text-2xl font-bold text-emerald-400">{attempt.score}</div>
               <div className="text-xs text-slate-500 uppercase">Correct</div>
