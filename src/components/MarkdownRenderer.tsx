@@ -18,7 +18,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeKatex]}
       components={{
-        p: ({node, ...props}) => <span className="inline" {...props} />,
+        p: ({node, ...props}) => <div className="inline" {...props} />,
       }}
     >
       {content}
