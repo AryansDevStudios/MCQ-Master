@@ -45,6 +45,7 @@ const prompt = ai.definePrompt({
   input: {schema: GenerateQuizFromTopicInputSchema},
   output: {schema: GenerateQuizFromTopicOutputSchema},
   prompt: `You are a quiz generator. Generate a quiz on the topic of {{topic}} with {{questionCount}} questions. The difficulty level should be {{difficulty}} and the quiz style should be {{quizStyle}}.
+You can use Markdown for formatting and LaTeX for mathematical expressions. For example, you can write inline math like \`$E=mc^2$\` or block-level math like \`$$x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$$\`. Make use of this to create rich and complex questions where appropriate.
 {{#if withExplanations}}
 Each question MUST have an explanation.
 {{else}}
